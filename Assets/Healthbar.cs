@@ -8,19 +8,22 @@ public class Healthbar : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthBarText;
     [SerializeField] Image healthBarFillImage;
     int maxHealth = int.MinValue;
+    bool isPlayer = false;
 
     private void Start()
     {
         healthBarSlider = GetComponent<Slider>();   
     }
-    public void Initialize(int maxHealth)
+    public void Initialize(int maxHealth, bool isPlayer) // made an initialize method so we can assign max health for enemies and player.
     {
+        this.isPlayer = isPlayer;
         this.maxHealth = maxHealth;
-        UpdateHealthBar(Player.instance.currentHealth);
+        UpdateHealthBar(maxHealth);
     }
     private void Update()
     {
-        UpdateHealthBar(Player.instance.currentHealth);
+        if (isPlayer) transform.LookAt(Player.instance.transform.position);
+        UpdateHealthBar(Player.instance.currentHealth);// DEBUGGING.
     }
     public void UpdateHealthBar(int currentHealth)
     {

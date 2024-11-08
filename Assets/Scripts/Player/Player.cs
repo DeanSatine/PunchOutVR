@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     public int currentHealth;
     public int baseDamage = 10;
 
+    const float blockingDamageMultiplier = 0.1f;
+
     #endregion
 
 
@@ -65,7 +67,7 @@ public class Player : MonoBehaviour
         InitializeControllers();
         currentHealth = maxHealth;
 
-        GetComponentInChildren<Healthbar>().Initialize(maxHealth);
+        GetComponentInChildren<Healthbar>().Initialize(maxHealth,true);
 
         // rn i have both these actions doing the same thing. later we can do different effects depending though.
         OnBlockEnter += () =>
@@ -91,6 +93,12 @@ public class Player : MonoBehaviour
         LeftControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out LeftHandVelocity);
         RightControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out RightHandVelocity);
 
+    }
+
+    public void TakeDamage(int damage)
+    {
+        
+        currentHealth -= Mathf.FloorToInt(damage * (IsBlocking ? blockingDamageMultiplier : 1)); // if blocking, deal 25% reduced damage
     }
 
     private void InitializeControllers()

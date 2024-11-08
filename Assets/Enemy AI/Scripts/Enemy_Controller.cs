@@ -10,6 +10,7 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] int Health;
     [SerializeField] Transform PlayerPosition;
     [SerializeField] Transform DirectionHelper;
+    [SerializeField] Healthbar healthbar;
 
     [Header("Blocking")]
     [SerializeField] bool isBlocking = false;
@@ -42,6 +43,8 @@ public class Enemy_Controller : MonoBehaviour
     void Start()
     {
         Health = enemy.MaxHealth;
+        healthbar = GetComponentInChildren<Healthbar>();
+        healthbar.Initialize(enemy.MaxHealth, false);
         XBounds = new Vector2(StageCenter.x - StageBounds.x, StageCenter.x + StageBounds.x);
         ZBounds = new Vector2(StageCenter.z - StageBounds.y, StageCenter.z + StageBounds.y);
     }
@@ -86,6 +89,8 @@ public class Enemy_Controller : MonoBehaviour
         {
             Health -= Damage;
         }
+
+        healthbar.UpdateHealthBar(Health);
 
         if (TimeBetweenPlayerStrikes.Count == enemy.Block_NunberSavedAttacks)
         {
