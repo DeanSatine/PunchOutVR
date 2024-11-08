@@ -8,17 +8,14 @@ public class Enemy_BodyPart : MonoBehaviour
     [SerializeField] float BodyPartDamageMultiplyer = 1;
 
     [Header("Prototyping")]
-    [SerializeField] bool isInPrototypingPhase = false;
+    [SerializeField] bool ProtottypeStrike = false;
     [SerializeField] float Prototype_Damage;
-    [SerializeField] KeyCode Prototype_Key;
     private void Update()
     {
-        if (isInPrototypingPhase)
+        if (ProtottypeStrike)
         {
-            if (Input.GetKeyDown(Prototype_Key))
-            {
                 TakeDamage(Prototype_Damage);
-            }
+            ProtottypeStrike = false;
         }
     }
 
