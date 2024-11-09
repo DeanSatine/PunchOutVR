@@ -8,6 +8,8 @@ public class Enemy_BodyPart : MonoBehaviour
     [SerializeField] float bodyPartDamageMultiplier = 1;
     public float BodyPartDamageMultiplier => bodyPartDamageMultiplier;
 
+
+
     [Header("Prototyping")]
     [SerializeField] bool ProtottypeStrike = false;
     [SerializeField] float Prototype_Damage;
@@ -25,5 +27,5 @@ public class Enemy_BodyPart : MonoBehaviour
         int finalDamage = Mathf.FloorToInt(damage * bodyPartDamageMultiplier);
         enemyController.TakeDamage( finalDamage );
        // Debug.Log("You struck " + enemyController.name + " in the " + gameObject.name + " for a base damage of " + damage.ToString() + " and a total damage of " + finalDamage.ToString() + ".");
-    }
+
 }

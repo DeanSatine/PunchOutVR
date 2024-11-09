@@ -12,6 +12,7 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] Transform DirectionHelper;
     [SerializeField] Healthbar healthbar;
 
+
     [Header("Blocking")]
     [SerializeField] bool isBlocking = false;
     [SerializeField] float BlockingDamageMultiplyer = 0.05f;
@@ -39,12 +40,14 @@ public class Enemy_Controller : MonoBehaviour
     [Header("Animation")]
     [SerializeField] string Animator_ParemeterName_IsAttacking;
     #endregion
+
     // Start is called before the first frame update
     void Start()
     {
         Health = enemy.MaxHealth;
         healthbar = GetComponentInChildren<Healthbar>();
         healthbar.Initialize(enemy.MaxHealth, false);
+
         XBounds = new Vector2(StageCenter.x - StageBounds.x, StageCenter.x + StageBounds.x);
         ZBounds = new Vector2(StageCenter.z - StageBounds.y, StageCenter.z + StageBounds.y);
     }
@@ -84,6 +87,7 @@ public class Enemy_Controller : MonoBehaviour
         if (isBlocking)
         {
             Health -= Mathf.FloorToInt(Damage * BlockingDamageMultiplyer);
+
         }
         else
         {
