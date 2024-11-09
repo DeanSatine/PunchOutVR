@@ -17,7 +17,7 @@ public class Enemy_BodyPart : MonoBehaviour
     {
         if (ProtottypeStrike)
         {
-                TakeDamage(Prototype_Damage);
+            TakeDamage(Prototype_Damage);
             ProtottypeStrike = false;
         }
     }
@@ -25,7 +25,8 @@ public class Enemy_BodyPart : MonoBehaviour
     public void TakeDamage(float damage)
     {
         int finalDamage = Mathf.FloorToInt(damage * bodyPartDamageMultiplier);
-        enemyController.TakeDamage( finalDamage );
-       // Debug.Log("You struck " + enemyController.name + " in the " + gameObject.name + " for a base damage of " + damage.ToString() + " and a total damage of " + finalDamage.ToString() + ".");
+        enemyController.TakeDamage(finalDamage);
+        // Debug.Log("You struck " + enemyController.name + " in the " + gameObject.name + " for a base damage of " + damage.ToString() + " and a total damage of " + finalDamage.ToString() + ".");
 
+    }
 }

@@ -1,8 +1,5 @@
 using UnityEngine;
-using UnityEngine.Android;
-using UnityEngine.XR;
-
-using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections;
 
 public class PlayerFist : MonoBehaviour
 {
@@ -12,14 +9,79 @@ public class PlayerFist : MonoBehaviour
 
     public bool isBlocking;
 
-    const float enemyPartGraceDistance = 0.15f;
-    
+    const float enemyPartGraceDistance = 0.15f; // used to for punch graces, where you hit in an area with multiple enemy part colliders near eachother.
+    public Transform gloveCanvas; // canvas for UI attached to glove.
+    const float rotationDuration = 0.125f; // duration for golveCanvas rotation.
+    const float upwardsTolerance = 0.15f;  // threshhold for what glove considers upwards facing.
+    Coroutine rotationCoroutine;
+    bool isFacingUpwards = false;
+
     #endregion
 
+
+    private void Update()
+    {
+        if (Player.instance.isRightHanded != IsRightHand) // if this hand is NOT the main hand.
+        {
+            bool isCurrentlyUpwards = IsFacingUpwards();
+            Debug.Log(isCurrentlyUpwards);
+            if (isFacingUpwards != isCurrentlyUpwards)
+            {
+                isFacingUpwards = isCurrentlyUpwards;
+                RotateGloveCanvas(isCurrentlyUpwards);
+            }
+        }
+    }
+
+    void RotateGloveCanvas(bool isUpwards)
+    {
+        Debug.Log("Changing");
+        if(rotationCoroutine!= null)StopCoroutine(rotationCoroutine);
+        if (isUpwards)
+        {
+            rotationCoroutine = StartCoroutine(SmoothRotateGloveCanvas(180));
+        }
+        else
+        {
+            rotationCoroutine = StartCoroutine(SmoothRotateGloveCanvas(90));
+        }
+
+
+        IEnumerator SmoothRotateGloveCanvas(float targetZRotation)
+        {
+            float startZ = gloveCanvas.localRotation.eulerAngles.z;
+            if (startZ == targetZRotation) yield break;
+            float elapsedTime = 0f;
+
+            while (elapsedTime < rotationDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsedTime / rotationDuration);
+                float currentZ = Mathf.Lerp(startZ, targetZRotation, t);
+
+                // Set only the Z rotation while keeping X and Y unchanged
+                gloveCanvas.localRotation= Quaternion.Euler(gloveCanvas.localRotation.eulerAngles.x, gloveCanvas.localRotation.eulerAngles.y, currentZ);
+
+                yield return null;
+            }
+
+            // Ensure it finishes at exactly 90
+            gloveCanvas.localRotation = Quaternion.Euler(gloveCanvas.localRotation.eulerAngles.x, gloveCanvas.localRotation.eulerAngles.y, targetZRotation);
+        }
+    }
+
+    bool IsFacingUpwards()
+    {
+        // Calculate the dot product between the object's up direction and the world up direction
+        float dotProduct = Vector3.Dot(transform.up, Vector3.down);
+
+        // Check if the dot product is close to 1 (perfectly aligned) within the tolerance range
+        return dotProduct >= 1f - upwardsTolerance;
+    }
     public void OnCollisionEnter(Collision collision)
     {
         // check if collided with enemy body part.
-        if(collision.gameObject.TryGetComponent(out Enemy_BodyPart enemyPart))
+        if (collision.gameObject.TryGetComponent(out Enemy_BodyPart enemyPart))
         {
 
             Enemy_BodyPart targetBodyPart = GetHighestDamagePartInRange( // scan in a radius around nearest contact point for other potentially higher damage body parts.
@@ -28,11 +90,12 @@ public class PlayerFist : MonoBehaviour
 
 
             // if somehow the check for nearby body parts returns null, this catches that.
-            if (targetBodyPart != null) {
+            if (targetBodyPart != null)
+            {
 
 
-                targetBodyPart.TakeDamage(GetVelocityModifiedDamage()); 
-            } 
+                targetBodyPart.TakeDamage(GetVelocityModifiedDamage());
+            }
             else enemyPart.TakeDamage(GetVelocityModifiedDamage());
         }
     }
@@ -98,9 +161,10 @@ public class PlayerFist : MonoBehaviour
         // this range of numbers becomes a multiplier for damage dealt, based on speed
         return targetHand.magnitude.NormalizeToRange(
             0.75f, // minimum damage multiplier 
-            1.6f,  // maximum damage multiplier
+            2.25f,  // maximum damage multiplier
             0,     // minimum velocity threshhold ( velocity for minimum damage )
             5);    // maximum velocity threshhold ( velocity for maximum damage )
     }
+
 
 }

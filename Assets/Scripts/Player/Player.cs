@@ -16,17 +16,19 @@ public class Player : MonoBehaviour
 
     [SerializeField] PlayerFist rightHand;
     [SerializeField] PlayerFist leftHand;
+    Healthbar healthBar;
     #endregion
 
     #region Variables and Properties
 
 
     #region Player Stats
+    public bool isRightHanded;
     public readonly int maxHealth = 100;
     public int currentHealth;
     public int baseDamage = 10;
 
-    const float blockingDamageMultiplier = 0.1f;
+    const float blockingDamageMultiplier = 1;//0.1f;
 
     #endregion
 
@@ -67,8 +69,8 @@ public class Player : MonoBehaviour
         InitializeControllers();
         currentHealth = maxHealth;
 
-        GetComponentInChildren<Healthbar>().Initialize(maxHealth,true);
-
+        healthBar = GetComponentInChildren<Healthbar>(true);
+        healthBar.Initialize(maxHealth, false);
         // rn i have both these actions doing the same thing. later we can do different effects depending though.
         OnBlockEnter += () =>
         {
@@ -80,7 +82,6 @@ public class Player : MonoBehaviour
             DEBUG_UI.instance.SetBlockingStateText(IsBlocking);
         };
     }
-
     void Update()
     {
         if (!LeftControllerDevice.isValid || !RightControllerDevice.isValid) // checks every frame for controllers if either left or right controller is not valid.
@@ -93,12 +94,28 @@ public class Player : MonoBehaviour
         LeftControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out LeftHandVelocity);
         RightControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out RightHandVelocity);
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ChangeHandedness(!isRightHanded);
+        }
+
+
+    }
+
+    public void ChangeHandedness(bool isRightHanded)
+    {
+        this.isRightHanded = isRightHanded;
+        Transform newHand = isRightHanded ? leftHand.gloveCanvas.transform : rightHand.gloveCanvas.transform; // UI will be on the non dominant hand.
+        healthBar.transform.SetParent(newHand, false);
     }
 
     public void TakeDamage(int damage)
     {
-        
+
+        int preDamageHealth = currentHealth;
         currentHealth -= Mathf.FloorToInt(damage * (IsBlocking ? blockingDamageMultiplier : 1)); // if blocking, deal 25% reduced damage
+        healthBar.UpdateHealthBar(preDamageHealth, currentHealth);
+        
     }
 
     private void InitializeControllers()

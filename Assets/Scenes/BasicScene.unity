@@ -1308,11 +1308,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2747764876959396866, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.672
       objectReference: {fileID: 0}
     - target: {fileID: 2747764876959396866, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985499362562324567, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4336764466139585209, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Pivot.x
@@ -1394,13 +1398,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6126767008865262864, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.831
+      objectReference: {fileID: 0}
+    - target: {fileID: 6126767008865262864, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8172230172495815135, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Name
       value: Healthbar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6690331168958283982, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
@@ -1425,7 +1436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1203902188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1439,7 +1450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 18180a7fd2adaf34abac19536986470c, type: 2}
-  Health: 0
+  health: 0
   PlayerPosition: {fileID: 1717954562066946108}
   DirectionHelper: {fileID: 150397108}
   healthbar: {fileID: 0}
@@ -2465,7 +2476,7 @@ GameObject:
   - component: {fileID: 1990238017}
   - component: {fileID: 1990238016}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: Enemy_WorldCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3193,7 +3204,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2190828209362437724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01f69dc1cb084aa42b2f2f8cd87bc770, type: 3}
   m_Name: 
@@ -3390,7 +3401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2626757739188761212
 GameObject:
   m_ObjectHideFlags: 0
@@ -3407,7 +3418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2749926995802846742
 Transform:
   m_ObjectHideFlags: 0
@@ -4522,6 +4533,7 @@ MonoBehaviour:
   leftHand: {fileID: 7171195870029205610}
   currentHealth: 0
   baseDamage: 10
+  TEMPDAMAGE: 5
 --- !u!1001 &6545633283778659966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4794,6 +4806,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2985499362562324567, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277632033299051590, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4336764466139585209, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4872,6 +4892,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4336764466139585209, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6126767008865262864, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6126767008865262864, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6126767008865262864, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8172230172495815135, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
@@ -5004,7 +5036,7 @@ MonoBehaviour:
   m_TurnAmount: 45
   m_DebounceTime: 0.5
   m_EnableTurnLeftRight: 1
-  m_EnableTurnAround: 1
+  m_EnableTurnAround: 0
   m_DelayTime: 0
   m_LeftHandTurnInput:
     m_InputSourceMode: 2

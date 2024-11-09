@@ -7,7 +7,8 @@ public class Enemy_Controller : MonoBehaviour
 {
     #region Variables and Properties
     [SerializeField] Enemy_Values enemy;
-    [SerializeField] int Health;
+    [SerializeField] int health;
+    public int Health => health;
     [SerializeField] Transform PlayerPosition;
     [SerializeField] Transform DirectionHelper;
     [SerializeField] Healthbar healthbar;
@@ -44,9 +45,9 @@ public class Enemy_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Health = enemy.MaxHealth;
+        health = enemy.MaxHealth;
         healthbar = GetComponentInChildren<Healthbar>();
-        healthbar.Initialize(enemy.MaxHealth, false);
+        healthbar.Initialize(enemy.MaxHealth, true);
 
         XBounds = new Vector2(StageCenter.x - StageBounds.x, StageCenter.x + StageBounds.x);
         ZBounds = new Vector2(StageCenter.z - StageBounds.y, StageCenter.z + StageBounds.y);
@@ -84,17 +85,11 @@ public class Enemy_Controller : MonoBehaviour
 
     public void TakeDamage(int Damage)
     {
-        if (isBlocking)
-        {
-            Health -= Mathf.FloorToInt(Damage * BlockingDamageMultiplyer);
+        int preDamageHealth = health;
+        int finalDamage = Mathf.FloorToInt(Damage * (isBlocking ? BlockingDamageMultiplyer : 1) );
+        health -= finalDamage;
 
-        }
-        else
-        {
-            Health -= Damage;
-        }
-
-        healthbar.UpdateHealthBar(Health);
+        healthbar.UpdateHealthBar(preDamageHealth, health);
 
         if (TimeBetweenPlayerStrikes.Count == enemy.Block_NunberSavedAttacks)
         {
