@@ -24,8 +24,7 @@ public class PlayerFist : MonoBehaviour
         if (Player.instance.isRightHanded != IsRightHand) // if this hand is NOT the main hand.
         {
             bool isCurrentlyUpwards = IsFacingUpwards();
-            Debug.Log(isCurrentlyUpwards);
-            if (isFacingUpwards != isCurrentlyUpwards)
+            if (isFacingUpwards != isCurrentlyUpwards) // check if state has changed.
             {
                 isFacingUpwards = isCurrentlyUpwards;
                 RotateGloveCanvas(isCurrentlyUpwards);
@@ -35,7 +34,6 @@ public class PlayerFist : MonoBehaviour
 
     void RotateGloveCanvas(bool isUpwards)
     {
-        Debug.Log("Changing");
         if(rotationCoroutine!= null)StopCoroutine(rotationCoroutine);
         if (isUpwards)
         {
@@ -59,23 +57,22 @@ public class PlayerFist : MonoBehaviour
                 float t = Mathf.Clamp01(elapsedTime / rotationDuration);
                 float currentZ = Mathf.Lerp(startZ, targetZRotation, t);
 
-                // Set only the Z rotation while keeping X and Y unchanged
+                // set Z rotation while keeping X and Y unchanged
                 gloveCanvas.localRotation= Quaternion.Euler(gloveCanvas.localRotation.eulerAngles.x, gloveCanvas.localRotation.eulerAngles.y, currentZ);
 
                 yield return null;
             }
 
-            // Ensure it finishes at exactly 90
             gloveCanvas.localRotation = Quaternion.Euler(gloveCanvas.localRotation.eulerAngles.x, gloveCanvas.localRotation.eulerAngles.y, targetZRotation);
         }
     }
 
     bool IsFacingUpwards()
     {
-        // Calculate the dot product between the object's up direction and the world up direction
+        // calculate dot product between objects up and world up 
         float dotProduct = Vector3.Dot(transform.up, Vector3.down);
 
-        // Check if the dot product is close to 1 (perfectly aligned) within the tolerance range
+        //  if dot product is 1, the rotations are the same. also gives tolerance.
         return dotProduct >= 1f - upwardsTolerance;
     }
     public void OnCollisionEnter(Collision collision)
