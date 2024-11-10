@@ -66,10 +66,12 @@ public class Enemy_Controller : MonoBehaviour
 
                 if (MovingTowardsPlayer)
                 {
+                    EnemyAnimator.SetBool(Animator_ParemeterName_IsJabbing, false);
                     MoveTowardsPlayer_Update();
                 }
                 else if (MovementQueue.Count > 0)
                 {
+                    EnemyAnimator.SetBool(Animator_ParemeterName_IsJabbing, false);
                     Movement_Update();
                 }
                 else
