@@ -35,7 +35,14 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField]float Combat_Timer;
 
     [Header("Animation")]
-    [SerializeField] string Animator_ParemeterName_IsAttacking;
+    [SerializeField] Animator EnemyAnimator;
+    [SerializeField] string Animator_ParemeterName_IsJabbing;
+    [SerializeField] string Animator_ParemeterName_IsBlocking;
+    [SerializeField] string Animator_ParemeterName_IsDead;
+    [SerializeField] string Animator_ParemeterName_HorizontalVector;
+    [SerializeField] string Animator_ParemeterName_VerticalVector;
+
+    bool isEnemyDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -48,29 +55,34 @@ public class Enemy_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EnemyLookAtPlayer_Update();
-        Block_Update();
-
-        if (!isBlocking)
+        if (!isEnemyDead)
         {
-            if (MovingTowardsPlayer)
+            EnemyAnimator.SetBool(Animator_ParemeterName_IsBlocking, isBlocking);
+            EnemyLookAtPlayer_Update();
+            Block_Update();
+
+            if (!isBlocking)
             {
-                MoveTowardsPlayer_Update();
+
+                if (MovingTowardsPlayer)
+                {
+                    MoveTowardsPlayer_Update();
+                }
+                else if (MovementQueue.Count > 0)
+                {
+                    Movement_Update();
+                }
+                else
+                {
+                    Combat_Update();
+                }
             }
-            else if (MovementQueue.Count > 0)
+
+            /*if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Movement_Update();
-            }
-            else
-            {
-                Combat_Update();
-            }
+                MakeMovementArk(true);
+            }*/
         }
-
-        /*if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            MakeMovementArk(true);
-        }*/
     }
 
     public void TakeDamage(float Damage)
@@ -94,6 +106,12 @@ public class Enemy_Controller : MonoBehaviour
         {
             TimeBetweenPlayerStrikes.Add(TimeSinceLastPlayerStrike);
             TimeSinceLastPlayerStrike = 0;
+        }
+
+        if (Health <= 0)
+        {
+            isEnemyDead = true;
+            EnemyAnimator.SetBool(Animator_ParemeterName_IsDead, true);
         }
     }
 
@@ -148,6 +166,15 @@ public class Enemy_Controller : MonoBehaviour
 
     void MakeMovementArk(bool isClockwise)
     {
+        if (isClockwise)
+        {
+            EnemyAnimator.SetFloat(Animator_ParemeterName_HorizontalVector, 1);
+        }
+        else
+        {
+            EnemyAnimator.SetFloat(Animator_ParemeterName_HorizontalVector, -1);
+        }
+
         int MovementDegrees = Random.Range(enemy.Movement_MinArkDegrees, enemy.Movement_MaxArkDegrees + 1);
 
         ArkMaker_Origin.position = PlayerPosition.position;
@@ -175,6 +202,9 @@ public class Enemy_Controller : MonoBehaviour
     
     void MoveTowardsPlayer_Update()
     {
+        EnemyAnimator.SetFloat(Animator_ParemeterName_HorizontalVector, 0);
+        EnemyAnimator.SetFloat(Animator_ParemeterName_VerticalVector, 1);
+
         ArkMaker_Origin.position = PlayerPosition.position;
         ArkMaker_Origin.position = new Vector3(ArkMaker_Origin.position.x, transform.position.y, ArkMaker_Origin.position.z);
         MovementPointer.LookAt(ArkMaker_Origin);
@@ -184,6 +214,7 @@ public class Enemy_Controller : MonoBehaviour
         if (Vector3.Distance(transform.position, PlayerPosition.position) <= enemy.Movement_PreferedDistanceFromPlayer)
         {
             MovingTowardsPlayer = false;
+            EnemyAnimator.SetFloat(Animator_ParemeterName_VerticalVector, 0);
         }
     }
 
@@ -223,6 +254,8 @@ public class Enemy_Controller : MonoBehaviour
     {
         if (AmountOfJabsBeingDone == 0)
         {
+            EnemyAnimator.SetBool(Animator_ParemeterName_IsJabbing, false);
+
             if (Vector3.Distance(transform.position, PlayerPosition.position) >= enemy.Movement_ToFarAwayFromPlayer)
             {
                 MovingTowardsPlayer = true;
@@ -254,6 +287,8 @@ public class Enemy_Controller : MonoBehaviour
         }
         else
         {
+            EnemyAnimator.SetBool(Animator_ParemeterName_IsJabbing, true);
+
             Combat_Timer -= Time.deltaTime;
 
             if (Combat_Timer <= 0)

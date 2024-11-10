@@ -25,6 +25,5 @@ MonoBehaviour:
   Combat_Damage: 10
   Combat_Damage_SpeedModifier: 2
   Combat_JabTimes:
-  - 2
-  - 3
-  - 2
+  - 1.375
+  - 1.3083333
