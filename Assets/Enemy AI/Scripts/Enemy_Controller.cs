@@ -9,6 +9,8 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] float Health;
     [SerializeField] Transform PlayerPosition;
     [SerializeField] Transform DirectionHelper;
+    [SerializeField] MatchManager manager;
+    public bool isMatchStarted;
 
     [Header("Blocking")]
     [SerializeField] bool isBlocking = false;
@@ -36,6 +38,7 @@ public class Enemy_Controller : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField] Animator EnemyAnimator;
+    [SerializeField] string Animator_ParemeterName_IsMatchStarted;
     [SerializeField] string Animator_ParemeterName_IsJabbing;
     [SerializeField] string Animator_ParemeterName_IsBlocking;
     [SerializeField] string Animator_ParemeterName_IsDead;
@@ -55,7 +58,9 @@ public class Enemy_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isEnemyDead)
+        EnemyAnimator.SetBool(Animator_ParemeterName_IsMatchStarted, !isMatchStarted);
+
+        if (!isEnemyDead && isMatchStarted)
         {
             EnemyAnimator.SetBool(Animator_ParemeterName_IsBlocking, isBlocking);
             EnemyLookAtPlayer_Update();
@@ -113,6 +118,7 @@ public class Enemy_Controller : MonoBehaviour
         if (Health <= 0)
         {
             isEnemyDead = true;
+            manager.Start_PlayerWinState();
             EnemyAnimator.SetBool(Animator_ParemeterName_IsDead, true);
         }
     }
