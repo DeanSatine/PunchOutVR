@@ -3313,6 +3313,45 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "CustomInputs",
+            "id": "1852fe2c-baa9-4ee5-a0c8-6a45f5103f68",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "78d1f418-b34f-41de-8221-bd86e85cf851",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3998ba30-ec3a-4c0f-b17d-4aaea4136c11",
+                    "path": "<XRController>{LeftHand}/{Primary2DAxisClick}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8159c13a-1061-42a2-83e9-9d093d0fe846",
+                    "path": "<XRController>{RightHand}/{Primary2DAxisClick}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

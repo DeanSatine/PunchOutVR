@@ -6,13 +6,13 @@ using UnityEngine;
 public static class Settings
 {
     static string settingsFilePath = Path.Combine(Application.persistentDataPath, "Settings.VRPO"); // path for settings file.
-    public static AudioSettings audioSettings;
-    public static PlayerSettings playerSettings;
+    public static AudioSettings audioSettings = new();
+    public static PlayerSettings playerSettings = new();
     public static Action<bool> OnHandednessChange = (value) => { }; // given empty lambda expression to avoid crashing if invoked with no subscribed methods.
 
     static Settings()
     {
-        Load(); // load previous settings on game start.
+       // Load(); // load previous settings on game start.
     }
 
     public static void Save()

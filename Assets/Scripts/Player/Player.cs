@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] PlayerFist rightHand;
     [SerializeField] PlayerFist leftHand;
+
     Healthbar healthBar;
     #endregion
 
