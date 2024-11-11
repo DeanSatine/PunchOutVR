@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         InitializeControllers();
+        InitializePlayer();
         currentHealth = maxHealth;
 
         healthBar = GetComponentInChildren<Healthbar>(true);
@@ -125,4 +126,14 @@ public class Player : MonoBehaviour
         RightControllerDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
     }
     #endregion
+
+    private void InitializePlayer()
+    {
+        Settings.OnHandednessChange += (value) => ChangeHandedness(value);
+    }
+
+    private void OnDestroy()
+    {
+        Settings.OnHandednessChange -= (value) => ChangeHandedness(value);
+    }
 }
