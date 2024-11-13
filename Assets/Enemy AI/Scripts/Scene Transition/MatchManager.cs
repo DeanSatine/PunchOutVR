@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MatchManager : MonoBehaviour
 {
+    public static MatchManager instance;
+
     [Header("UI / Fading & Timings")]
     [SerializeField] RawImage VSScreen;
     [SerializeField] float VSScreenTimeOnScreen;
@@ -30,17 +33,77 @@ public class MatchManager : MonoBehaviour
     int OnMatchStartPart = 1;
     bool isEnemyDead = false;
     bool isPlayerDead;
-    
+    public bool playerReadied = false;
+
+    private void Awake()
+    {
+        if (instance != null) { Destroy(instance.gameObject); }
+        instance = this;
+    }
     void Start()
     {
         Fade_Timer = FadeInTime;
         FadeInOut.color = new Color(FadeInOut.color.r, FadeInOut.color.g, FadeInOut.color.b, Fade_Timer / FadeInTime);
+        StartCoroutine(VSScreenLoop());
+
     }
 
+
+    IEnumerator VSScreenLoop()
+    {
+        yield return new WaitUntil(() => isMatchStart);
+
+        while (OnMatchStartPart == 1){
+                Fade_Timer -= Time.deltaTime;
+                if (Fade_Timer <= 0)
+                {
+                    Fade_Timer = VSScreenTimeOnScreen;
+                    OnMatchStartPart++;
+                    FadeInOut.color = new Color(FadeInOut.color.r, FadeInOut.color.g, FadeInOut.color.b, 0);
+                }
+                else
+                {
+                    FadeInOut.color = new Color(FadeInOut.color.r, FadeInOut.color.g, FadeInOut.color.b, Fade_Timer / FadeInTime);
+                }
+            yield return null;
+        }
+
+        while(OnMatchStartPart == 2){
+            Fade_Timer -= Time.deltaTime;
+            if (Fade_Timer <= 0)
+            {
+                Fade_Timer = VSScreenFadeTime;
+                OnMatchStartPart++;
+            }
+            yield return null;
+        }
+
+
+        yield return new WaitUntil(() => playerReadied);
+
+        while(Fade_Timer >=0)
+        {
+            Fade_Timer -= Time.deltaTime;
+
+            if (Fade_Timer <= 0)
+            {
+                enemy_Controller.isMatchStarted = true;
+                isMatchStart = false;
+                VSScreen.color = new Color(VSScreen.color.r, VSScreen.color.g, VSScreen.color.b, 0);
+            }
+            else
+            {
+                VSScreen.color = new Color(VSScreen.color.r, VSScreen.color.g, VSScreen.color.b, Fade_Timer / VSScreenFadeTime);
+            }
+            yield return null;
+        }
+
+
+    }
     
     void Update()
     {
-        if (isMatchStart)
+        /*if (isMatchStart)
         {
             if (OnMatchStartPart == 1)
             {
@@ -80,7 +143,7 @@ public class MatchManager : MonoBehaviour
                     VSScreen.color = new Color(VSScreen.color.r, VSScreen.color.g, VSScreen.color.b, Fade_Timer / VSScreenFadeTime);
                 }
             }
-        }
+        }*/
 
         if (EnemyDeathTimer > 0)
         {
@@ -115,11 +178,6 @@ public class MatchManager : MonoBehaviour
             }
         }
 
-        if (prototypePlayerLose)
-        {
-            Start_PlayerLoseState();
-            prototypePlayerLose = false;
-        }
     }
 
     public void Start_PlayerWinState()

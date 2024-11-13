@@ -80,6 +80,7 @@ public class PlayerFist : MonoBehaviour
         // check if collided with enemy body part.
         if (collision.gameObject.TryGetComponent(out Enemy_BodyPart enemyPart))
         {
+            Debug.Log(enemyPart.gameObject.name);
 
             Enemy_BodyPart targetBodyPart = GetHighestDamagePartInRange( // scan in a radius around nearest contact point for other potentially higher damage body parts.
                 GetClosestContactToEnemyPart(enemyPart, collision) // get contact point from fist that is closest to the enemy body part we have collided with.

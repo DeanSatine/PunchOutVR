@@ -96,11 +96,6 @@ public class Player : MonoBehaviour
         LeftControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out LeftHandVelocity);
         RightControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out RightHandVelocity);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ChangeHandedness(!isRightHanded);
-        }
-
 
     }
 
@@ -117,6 +112,11 @@ public class Player : MonoBehaviour
         int preDamageHealth = currentHealth;
         currentHealth -= Mathf.FloorToInt(damage * (IsBlocking ? blockingDamageMultiplier : 1)); // if blocking, deal 25% reduced damage
         healthBar.UpdateHealthBar(preDamageHealth, currentHealth);
+
+        if(currentHealth <= 0)
+        {
+            MatchManager.instance.Start_PlayerLoseState();
+        }
         
     }
 
