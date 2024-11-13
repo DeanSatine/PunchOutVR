@@ -1032,10 +1032,22 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4396642182433536433, guid: beae939afda44da4a87e8df456f2a035, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e0649ec9803cf00498e77ed4899f5b77, type: 2}
+    - target: {fileID: -666985854777507172, guid: beae939afda44da4a87e8df456f2a035, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a9df6e9c4cf28241ad715fb1fc9cc9a, type: 2}
     - target: {fileID: 919132149155446097, guid: beae939afda44da4a87e8df456f2a035, type: 3}
       propertyPath: m_Name
       value: donaldtrumpboxer
       objectReference: {fileID: 0}
+    - target: {fileID: 4768042333316372434, guid: beae939afda44da4a87e8df456f2a035, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 838da11a0f11ede4f8b4e8539f4af5a3, type: 2}
     - target: {fileID: 5866666021909216657, guid: beae939afda44da4a87e8df456f2a035, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1050,6 +1062,10 @@ PrefabInstance:
         'mixamorig:Head'\n\tTransform 'mixamorig:LeftUpLeg'\n\tand more ...\n\tFrom
         animation clip 'trumppunch2'"
       objectReference: {fileID: 0}
+    - target: {fileID: 8174758982296289047, guid: beae939afda44da4a87e8df456f2a035, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d262d0521bbb6db4d895813068354e24, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1717,6 +1733,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -4396642182433536433, guid: beae939afda44da4a87e8df456f2a035, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e0649ec9803cf00498e77ed4899f5b77, type: 2}
     - target: {fileID: -4332706925441422008, guid: beae939afda44da4a87e8df456f2a035, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1761,6 +1781,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -666985854777507172, guid: beae939afda44da4a87e8df456f2a035, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a9df6e9c4cf28241ad715fb1fc9cc9a, type: 2}
     - target: {fileID: -290750445479886849, guid: beae939afda44da4a87e8df456f2a035, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1813,10 +1837,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4768042333316372434, guid: beae939afda44da4a87e8df456f2a035, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 838da11a0f11ede4f8b4e8539f4af5a3, type: 2}
     - target: {fileID: 5866666021909216657, guid: beae939afda44da4a87e8df456f2a035, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 11b0bc957c922ac4ab072b424a362838, type: 2}
+    - target: {fileID: 8174758982296289047, guid: beae939afda44da4a87e8df456f2a035, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d262d0521bbb6db4d895813068354e24, type: 2}
     - target: {fileID: 8817898888258712963, guid: beae939afda44da4a87e8df456f2a035, type: 3}
       propertyPath: m_Layer
       value: 8
