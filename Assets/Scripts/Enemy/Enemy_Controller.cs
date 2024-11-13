@@ -270,7 +270,7 @@ public class Enemy_Controller : MonoBehaviour
                 MovementQueue.Clear();
             }
 
-            if (MovementQueue.Count == 0)
+            if (MovementQueue.Count == 0 && !MovingTowardsPlayer)
             {
                 int RandomWeight = Random.Range(1, enemy.Movement_MovementBeforeAttackingRandomizer + 1);
 
