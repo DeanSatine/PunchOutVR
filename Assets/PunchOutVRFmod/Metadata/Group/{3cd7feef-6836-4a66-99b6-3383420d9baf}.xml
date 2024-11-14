@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{3cd7feef-6836-4a66-99b6-3383420d9baf}">
+		<property name="name">
+			<value>Punch_Sounds</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{f5785cfa-39ab-42c7-9079-fd2527bce7f8}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{6c3901d4-0fb0-45e6-97aa-4910b57f56a3}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{9bee1b75-ee6a-4ec4-a631-a80bbbc2a3c1}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{f5785cfa-39ab-42c7-9079-fd2527bce7f8}">
+		<relationship name="effects">
+			<destination>{c185dc5e-fa20-4b99-ba22-69eca673c629}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{6c3901d4-0fb0-45e6-97aa-4910b57f56a3}" />
+	<object class="MixerBusFader" id="{c185dc5e-fa20-4b99-ba22-69eca673c629}" />
+</objects>

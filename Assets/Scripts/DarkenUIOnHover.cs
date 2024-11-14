@@ -8,9 +8,11 @@ public class DarkenUIOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
 {
     [SerializeField]Image image;
     static Color darkenedColour = new Color(0.8f, 0.8f, 0.8f, 1);
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         image.color = darkenedColour;
+        AudioManager.instance.PlayOneShot(AudioManager.instance.UI_OnHover);
     }
 
     // Called when the mouse exits the UI element

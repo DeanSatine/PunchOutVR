@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using UnityEngine;
+using FMODUnity;
+using FMOD.Studio;
 
 [Serializable]
 public static class Settings
@@ -90,12 +92,59 @@ public static class Settings
 [Serializable]
 public class AudioSettings
 {
-    float masterVolume = 1f;
+    Bus masterBus;
+    Bus crowdBus;
+    Bus heartbeatBus;
+    Bus punchBus;
+    Bus uiBus;
+
+
+    public AudioSettings()
+    {
+        RuntimeManager.StudioSystem.getBus("bus:/", out masterBus);
+        RuntimeManager.StudioSystem.getBus("bus:/Crowd_Cheering", out crowdBus);
+        RuntimeManager.StudioSystem.getBus("bus:/Heartbeat", out heartbeatBus);
+        RuntimeManager.StudioSystem.getBus("bus:/Punch_Sounds", out punchBus);
+        RuntimeManager.StudioSystem.getBus("bus:/UI_Sounds", out uiBus);
+        //RuntimeManager.StudioSystem.getBus("bus:/", out masterBus);
+    }
+
+
+    float master_Volume = 1;
     public float MasterVolume
     {
-        get { return masterVolume; }
-        set { masterVolume = value; AudioManager.instance.AssignMasterVolume( Mathf.Round(value*100)/100 ); }
+        get { return master_Volume; }
+        set { master_Volume = value; masterBus.setVolume(Mathf.Round(value * 100) / 100); }
     }
+    
+    float crowd_Volume = 1;
+    public float CrowdVolume
+    {
+        get { return crowd_Volume; }
+        set { crowd_Volume = value; crowdBus.setVolume(Mathf.Round(value * 100) / 100); }
+    }
+   
+    float heartbeat_Volume = 1;
+    public float HeartbeatVolume
+    {
+        get { return heartbeat_Volume; }
+        set { heartbeat_Volume = value; heartbeatBus.setVolume(Mathf.Round(value * 100) / 100); }
+    }
+   
+    float punch_Volume = 1;
+    public float PunchVolume
+    {
+        get { return PunchVolume; }
+        set { punch_Volume = value; punchBus.setVolume(Mathf.Round(value * 100) / 100); }
+    }
+    
+    float ui_Volume = 1;
+    public float UIVolume
+    {
+        get { return ui_Volume; }
+        set { ui_Volume = value; uiBus.setVolume(Mathf.Round(value * 100) / 100); }
+    }
+
 
 }
 

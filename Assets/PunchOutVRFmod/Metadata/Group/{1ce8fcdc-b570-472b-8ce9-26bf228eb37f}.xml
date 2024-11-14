@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{1ce8fcdc-b570-472b-8ce9-26bf228eb37f}">
+		<property name="name">
+			<value>Crowd_Cheering</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{36af835e-23b1-4383-8aab-f4ace2746108}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{ea9b8905-eac1-4f06-9029-ad52a5f6e983}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{9bee1b75-ee6a-4ec4-a631-a80bbbc2a3c1}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{36af835e-23b1-4383-8aab-f4ace2746108}">
+		<relationship name="effects">
+			<destination>{b58d5474-289a-4772-adb8-15235878043b}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{ea9b8905-eac1-4f06-9029-ad52a5f6e983}" />
+	<object class="MixerBusFader" id="{b58d5474-289a-4772-adb8-15235878043b}" />
+</objects>
