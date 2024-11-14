@@ -90,7 +90,7 @@ public static class Settings
 [Serializable]
 public class AudioSettings
 {
-    float masterVolume = 0.5f;
+    float masterVolume = 1f;
     public float MasterVolume
     {
         get { return masterVolume; }

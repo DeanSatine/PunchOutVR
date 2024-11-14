@@ -26,9 +26,9 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    void PlayOneShot()
+    public void PlayOneShot(EventReference fmodEvent)
     {
-        RuntimeManager.PlayOneShot(exampleEvent);
+        RuntimeManager.PlayOneShot(fmodEvent);
     }
 
     public void UpdateHealthFmodParam(int health)

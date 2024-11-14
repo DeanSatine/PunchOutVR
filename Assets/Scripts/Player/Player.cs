@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
-
+using FMODUnity;
 using UnityEngine.XR;
 
 using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] PlayerFist rightHand;
     [SerializeField] PlayerFist leftHand;
-
+    [SerializeField] EventReference punchEvent;
     Healthbar healthBar;
     #endregion
 
@@ -30,6 +31,13 @@ public class Player : MonoBehaviour
     public int baseDamage = 10;
 
     const float blockingDamageMultiplier = 1;//0.1f;
+    [SerializeField] float punchSoundVelocityThreshhold;
+    [SerializeField] float punchSoundCooldown;
+    WaitForSeconds punchCooldown;
+
+    Coroutine leftHandPunchSound;
+    Coroutine rightHandPunchSound;
+
 
     #endregion
 
@@ -70,7 +78,7 @@ public class Player : MonoBehaviour
         InitializeControllers();
         InitializePlayer();
         currentHealth = maxHealth;
-
+        //punchCooldown = new WaitForSeconds(punchSoundCooldown);
         healthBar = GetComponentInChildren<Healthbar>(true);
         healthBar.Initialize(maxHealth, false);
         // rn i have both these actions doing the same thing. later we can do different effects depending though.
@@ -96,8 +104,33 @@ public class Player : MonoBehaviour
         LeftControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out LeftHandVelocity);
         RightControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out RightHandVelocity);
 
-        if (Input.GetKeyDown(KeyCode.Space)) { TakeDamage(5); }
+
+        if (LeftHandVelocity.magnitude > punchSoundVelocityThreshhold) {
+
+            if (leftHandPunchSound == null)
+            {
+                leftHandPunchSound = StartCoroutine(PlayPunch());
+            }
+        }
+        if(RightHandVelocity.magnitude > punchSoundVelocityThreshhold) {
+
+            if (rightHandPunchSound == null)
+            {
+                rightHandPunchSound = StartCoroutine(PlayPunch(true));
+            }
+        }
+
     }
+
+    IEnumerator PlayPunch(bool isRightHand = false)
+    {
+        AudioManager.instance.PlayOneShot(punchEvent);
+        yield return new WaitForSeconds(punchSoundCooldown); //punchCooldown;
+        if (isRightHand) rightHandPunchSound = null;
+        else leftHandPunchSound = null;
+
+    }
+
 
     public void ChangeHandedness(bool isRightHanded)
     {
