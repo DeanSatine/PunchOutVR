@@ -20,7 +20,7 @@ MonoBehaviour:
   ID:
     data1: 3002187144
     data2: 2127753011
-  Type: 0
+  Type: 1
   IsGlobal: 1
   Labels: []
   Exists: 1
@@ -67,10 +67,10 @@ MonoBehaviour:
   Path: Assets/PunchOutVRFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638671262532170196
+  lastModified: 638671811651233838
   FileSizes:
   - Name: Desktop
-    Value: 519840
+    Value: 529312
   Exists: 1
 --- !u!114 &-4242076121369140471
 MonoBehaviour:
@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: Assets/PunchOutVRFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638671262532202004
+  lastModified: 638671811651243757
   FileSizes:
   - Name: Desktop
     Value: 1010
@@ -146,7 +146,7 @@ MonoBehaviour:
   - {fileID: -4367178658585532263}
   StringsBanks:
   - {fileID: -148386902754869998}
-  cacheTime: 638671262532202004
+  cacheTime: 638671811651243757
   cacheVersion: 131621
 --- !u!114 &791304038476672877
 MonoBehaviour:
@@ -196,7 +196,7 @@ MonoBehaviour:
   ID:
     data1: 3002187144
     data2: 2127753011
-  Type: 0
+  Type: 1
   IsGlobal: 1
   Labels: []
   Exists: 1
@@ -248,7 +248,7 @@ MonoBehaviour:
   ID:
     data1: 3002187144
     data2: 2127753011
-  Type: 0
+  Type: 1
   IsGlobal: 1
   Labels: []
   Exists: 1
@@ -272,7 +272,7 @@ MonoBehaviour:
   ID:
     data1: 3002187144
     data2: 2127753011
-  Type: 0
+  Type: 1
   IsGlobal: 1
   Labels: []
   Exists: 1
@@ -296,7 +296,7 @@ MonoBehaviour:
   ID:
     data1: 3002187144
     data2: 2127753011
-  Type: 0
+  Type: 1
   IsGlobal: 1
   Labels: []
   Exists: 1

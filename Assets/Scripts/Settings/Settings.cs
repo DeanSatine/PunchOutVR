@@ -94,8 +94,9 @@ public class AudioSettings
     public float MasterVolume
     {
         get { return masterVolume; }
-        set { masterVolume = value;  /* ACTUALLY ASSIGN VOLUME TO FMOD HERE.*/}
+        set { masterVolume = value; AudioManager.instance.AssignMasterVolume( Mathf.Round(value*100)/100 ); }
     }
+
 }
 
 [Serializable]

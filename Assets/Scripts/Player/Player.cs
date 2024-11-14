@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         LeftControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out LeftHandVelocity);
         RightControllerDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out RightHandVelocity);
 
-
+        if (Input.GetKeyDown(KeyCode.Space)) { TakeDamage(5); }
     }
 
     public void ChangeHandedness(bool isRightHanded)
@@ -117,6 +117,8 @@ public class Player : MonoBehaviour
         {
             MatchManager.instance.Start_PlayerLoseState();
         }
+
+        AudioManager.instance.UpdateHealthFmodParam(currentHealth);
         
     }
 
