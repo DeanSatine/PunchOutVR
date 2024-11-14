@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{9c8353b6-e6cc-45a6-9eec-88c508a6aa84}">
+		<property name="assetPath">
+			<value>Music/MainMenuTheme_162bpm_BIDENBRAWLERS.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>59.259274376417231</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a6acd009-cec3-472a-929f-3773c7ad2b59}</destination>
+		</relationship>
+	</object>
+</objects>
