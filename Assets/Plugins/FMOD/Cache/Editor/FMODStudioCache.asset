@@ -46,12 +46,12 @@ MonoBehaviour:
   - {fileID: -4367178658585532263}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters:
   - {fileID: 2470712423246168713}
   MinDistance: 1
   MaxDistance: 20
-  Length: 12088
+  Length: 12000
 --- !u!114 &-4367178658585532263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,10 +67,10 @@ MonoBehaviour:
   Path: Assets/PunchOutVRFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638671252776055858
+  lastModified: 638671262532170196
   FileSizes:
   - Name: Desktop
-    Value: 519968
+    Value: 519840
   Exists: 1
 --- !u!114 &-4242076121369140471
 MonoBehaviour:
@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: Assets/PunchOutVRFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638671252776095537
+  lastModified: 638671262532202004
   FileSizes:
   - Name: Desktop
     Value: 1010
@@ -146,7 +146,7 @@ MonoBehaviour:
   - {fileID: -4367178658585532263}
   StringsBanks:
   - {fileID: -148386902754869998}
-  cacheTime: 638671252776095537
+  cacheTime: 638671262532202004
   cacheVersion: 131621
 --- !u!114 &791304038476672877
 MonoBehaviour:
@@ -170,7 +170,7 @@ MonoBehaviour:
   - {fileID: -4367178658585532263}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: 7882805314729324230}
   MinDistance: 1
@@ -222,7 +222,7 @@ MonoBehaviour:
   - {fileID: -4367178658585532263}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: 5815569457553351922}
   MinDistance: 1

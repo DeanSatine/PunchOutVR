@@ -69,9 +69,6 @@
 		<relationship name="modules">
 			<destination>{91d2069f-8866-413a-90b6-8dcc0f1cec84}</destination>
 		</relationship>
-		<relationship name="markers">
-			<destination>{72e2304f-c7a6-4a55-975c-4a0ca0d9efc0}</destination>
-		</relationship>
 	</object>
 	<object class="ParameterProxy" id="{243035b0-6fdc-4a44-bf34-e167e5b29148}">
 		<relationship name="preset">
@@ -122,20 +119,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{f3e19349-0279-4110-869d-fb23f6456c8e}" />
-	<object class="LoopRegion" id="{72e2304f-c7a6-4a55-975c-4a0ca0d9efc0}">
-		<property name="position">
-			<value>0</value>
-		</property>
-		<property name="length">
-			<value>0.75369458128078815</value>
-		</property>
-		<relationship name="timeline">
-			<destination>{e491724d-9633-4914-94ff-fed793c153c5}</destination>
-		</relationship>
-		<relationship name="markerTrack">
-			<destination>{21e8f22d-3962-45fa-a0fc-e445cc8957c2}</destination>
-		</relationship>
-	</object>
 	<object class="Automator" id="{fce5747e-5c94-44cf-a67b-9061e0bd63c0}">
 		<property name="nameOfPropertyBeingAutomated">
 			<value>volume</value>
