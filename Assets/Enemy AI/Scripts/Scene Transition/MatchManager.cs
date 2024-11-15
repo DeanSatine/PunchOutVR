@@ -1,4 +1,6 @@
+using FMOD.Studio;
 using System.Collections;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,6 +19,11 @@ public class MatchManager : MonoBehaviour
     [SerializeField] float FadeOutTime_PlayerWin;
     [SerializeField] float FadeOutTime_EnemyWin;
     float Fade_Timer;
+    EventInstance cheeringInstance;
+    EventInstance heartbeatInstance;
+
+    const string cheeringPath = "event:/SFX/CrowdCheering";
+    const string heartbeatPath = "event:/SFX/Heart Beat";
 
     [Header("Script Refrences")]
     [SerializeField] Enemy_Controller enemy_Controller;
@@ -45,9 +52,29 @@ public class MatchManager : MonoBehaviour
         Fade_Timer = FadeInTime;
         FadeInOut.color = new Color(FadeInOut.color.r, FadeInOut.color.g, FadeInOut.color.b, Fade_Timer / FadeInTime);
         StartCoroutine(VSScreenLoop());
+        cheeringInstance.start();
+        heartbeatInstance.start();
 
     }
 
+    void StopAudio()
+    {
+        if (cheeringInstance.isValid())
+        {
+            cheeringInstance.stop(STOP_MODE.IMMEDIATE);
+            cheeringInstance.release();
+        }
+        if (heartbeatInstance.isValid())
+        {
+            heartbeatInstance.stop(STOP_MODE.IMMEDIATE);
+            heartbeatInstance.release();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        StopAudio();
+    }
 
     IEnumerator VSScreenLoop()
     {

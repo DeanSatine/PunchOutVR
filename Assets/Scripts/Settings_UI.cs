@@ -4,6 +4,7 @@ public class Settings_UI : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI masterVolumeText;
+    [SerializeField] TextMeshProUGUI musicVolumeText;
     [SerializeField] TextMeshProUGUI crowdVolumeText;
     [SerializeField] TextMeshProUGUI heartbeatVolumeText;
     [SerializeField] TextMeshProUGUI punchVolumeText;
@@ -30,7 +31,11 @@ public class Settings_UI : MonoBehaviour
         Settings.audioSettings.MasterVolume = value;
         masterVolumeText.text =  Mathf.Round(value * 100).ToString();
     }
-
+    public void SetMusicVolume(float value)
+    {
+        Settings.audioSettings.MusicVolume = value;
+        musicVolumeText.text = Mathf.Round(value * 100).ToString();
+    }
     public void SetCrowdVolume(float value)
     {
         Settings.audioSettings.CrowdVolume = value;

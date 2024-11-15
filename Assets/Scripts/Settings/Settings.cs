@@ -94,6 +94,7 @@ public class AudioSettings
 {
     Bus masterBus;
     Bus crowdBus;
+    Bus musicBus;
     Bus heartbeatBus;
     Bus punchBus;
     Bus uiBus;
@@ -106,7 +107,7 @@ public class AudioSettings
         RuntimeManager.StudioSystem.getBus("bus:/Heartbeat", out heartbeatBus);
         RuntimeManager.StudioSystem.getBus("bus:/Punch_Sounds", out punchBus);
         RuntimeManager.StudioSystem.getBus("bus:/UI_Sounds", out uiBus);
-        //RuntimeManager.StudioSystem.getBus("bus:/", out masterBus);
+        RuntimeManager.StudioSystem.getBus("bus:/Music", out musicBus);
     }
 
 
@@ -116,6 +117,14 @@ public class AudioSettings
         get { return master_Volume; }
         set { master_Volume = value; masterBus.setVolume(Mathf.Round(value * 100) / 100); }
     }
+
+    float music_Volume = 1;
+    public float MusicVolume
+    {
+        get => music_Volume;
+        set {  music_Volume = value; musicBus.setVolume(Mathf.Round(value * 100) / 100);}
+    }
+
     
     float crowd_Volume = 1;
     public float CrowdVolume
