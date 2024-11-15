@@ -387,9 +387,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHand: {fileID: 306847321468389114}
   leftHand: {fileID: 5436242626552241308}
+  punchEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   isRightHanded: 1
   currentHealth: 0
   baseDamage: 10
+  punchSoundVelocityThreshhold: 0
+  punchSoundCooldown: 0
 --- !u!1 &1620384081621704681
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,7 +625,7 @@ GameObject:
   - component: {fileID: 9186532893114191007}
   - component: {fileID: 4763787612767750699}
   - component: {fileID: 824420101556973555}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: GloveCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2204,7 +2213,7 @@ GameObject:
   - component: {fileID: 7661589282870933908}
   - component: {fileID: 4981464762340446567}
   - component: {fileID: 412401215999444738}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: GloveCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2825,7 +2834,7 @@ GameObject:
   - component: {fileID: 493039850732290046}
   - component: {fileID: 7065049694206379135}
   - component: {fileID: 306847321468389114}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: BoxingGloveR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2879,6 +2888,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: 68d1c68729f4f1746aeffc5598afbfdb, type: 2}
   - {fileID: 2100000, guid: 2373152fe9ba5094797961c437edb5ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -2978,7 +2988,7 @@ GameObject:
   - component: {fileID: 7041912848657912270}
   - component: {fileID: 2440481856162193812}
   - component: {fileID: 5436242626552241308}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: BoxingGloveL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3032,6 +3042,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: 68d1c68729f4f1746aeffc5598afbfdb, type: 2}
   - {fileID: 2100000, guid: 2373152fe9ba5094797961c437edb5ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -3992,15 +4003,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 388549096403216440, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1134358708070097846, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2485096919908044578, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2747764876959396866, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4016,7 +4027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3123910789341830181, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4277632033299051590, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Value
@@ -4116,7 +4127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5208726032298087773, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6126767008865262864, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4132,11 +4143,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6341613863387372335, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7051492200237923467, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8172230172495815135, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Name
@@ -4144,15 +4155,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8172230172495815135, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8544340203953445433, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8680223474508267278, guid: 7afb51efa9fa5394bb6f0e00ee3a953c, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
