@@ -67,7 +67,7 @@ MonoBehaviour:
   Path: Assets/PunchOutVRFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638671854571001394
+  lastModified: 638672142998637460
   FileSizes:
   - Name: Desktop
     Value: 530688
@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: Assets/PunchOutVRFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638671854571021212
+  lastModified: 638672142998652823
   FileSizes:
   - Name: Desktop
     Value: 1228
@@ -147,7 +147,7 @@ MonoBehaviour:
   - {fileID: -4367178658585532263}
   StringsBanks:
   - {fileID: -148386902754869998}
-  cacheTime: 638671854571021212
+  cacheTime: 638672142998652823
   cacheVersion: 131621
 --- !u!114 &791304038476672877
 MonoBehaviour:
