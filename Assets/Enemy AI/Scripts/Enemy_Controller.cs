@@ -354,7 +354,7 @@ public class Enemy_Controller : MonoBehaviour
                 foreach (Collider Lidar in LidarsInRange)
                 {
                     float Velocity = Vector3.Distance(FistArea.PreviousPosition, FistArea.FistBone.position);
-                    PrototypeDealDamageToPlayer(enemy.Combat_Damage * FistArea.DamageMultiplyer * (Velocity * enemy.Combat_Damage_SpeedModifier));
+                    PrototypeDealDamageToPlayer(enemy.Combat_Damage * FistArea.DamageMultiplyer); //* (Velocity * enemy.Combat_Damage_SpeedModifier));
                     FistArea.HasHitPlayerThisRound = true;
                 }
                 FistArea.PreviousPosition = FistArea.FistBone.position;
@@ -365,6 +365,7 @@ public class Enemy_Controller : MonoBehaviour
     void PrototypeDealDamageToPlayer(float Damage)
     {
         Debug.Log(gameObject.name + " did " +  Damage.ToString() + " to the player.");
+        Player.instance.TakeDamage((int)Damage);
     }
 
     #endregion

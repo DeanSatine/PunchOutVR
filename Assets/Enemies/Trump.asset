@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b167851848320c458a34a1859e7d51d, type: 3}
   m_Name: Trump
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 200
   Block_NunberSavedAttacks: 5
   Block_AverageSpeedUntilBlock: 1
   Block_TimeUntilStopBlocking: 2

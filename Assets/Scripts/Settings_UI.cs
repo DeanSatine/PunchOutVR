@@ -1,5 +1,8 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.XR.Management;
+using UnityEngine.XR;
+
 public class Settings_UI : MonoBehaviour
 {
 
@@ -26,6 +29,10 @@ public class Settings_UI : MonoBehaviour
         Settings.Load();
     }
 
+    public void TryRecenter()
+    {
+        XRGeneralSettings.Instance.Manager.activeLoader.GetLoadedSubsystem<XRInputSubsystem>().TryRecenter();
+    }
     public void SetMasterVolume(float value)
     {
         Settings.audioSettings.MasterVolume = value;

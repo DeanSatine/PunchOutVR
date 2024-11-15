@@ -190,7 +190,9 @@ public class MatchManager : MonoBehaviour
 
             if (Fade_Timer >= FadeOutTime_PlayerWin)
             {
-                SceneManager.LoadScene(NextScene_Index);
+                if(NextScene_Index >= SceneManager.sceneCountInBuildSettings) { SceneManager.LoadScene(0); } // if final scene reached, go back to title.
+                else SceneManager.LoadScene(NextScene_Index);
+                
             }
         }
 

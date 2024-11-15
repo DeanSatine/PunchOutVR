@@ -236,7 +236,8 @@ GameObject:
   - component: {fileID: 7180645062647800809}
   - component: {fileID: 8135960151201328570}
   - component: {fileID: 7696923503140345405}
-  m_Layer: 2
+  - component: {fileID: 2940835918558227471}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,11 +395,48 @@ MonoBehaviour:
       Data3: 235613365
       Data4: -370840120
     Path: event:/SFX/OneShotSFX/PunchWhoosh
+  crowdCheerEvent:
+    Guid:
+      Data1: -1733609427
+      Data2: 1315800567
+      Data3: 1929766326
+      Data4: 1960083632
+    Path: event:/SFX/CrowdCheering
+  heartbeatEvent:
+    Guid:
+      Data1: 308284571
+      Data2: 1113921324
+      Data3: -1965929033
+      Data4: -624008499
+    Path: event:/SFX/Heart Beat
   isRightHanded: 1
   currentHealth: 0
   baseDamage: 10
   punchSoundVelocityThreshhold: 1.25
   punchSoundCooldown: 0.55
+--- !u!136 &2940835918558227471
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619113175060822885}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1620384081621704681
 GameObject:
   m_ObjectHideFlags: 0

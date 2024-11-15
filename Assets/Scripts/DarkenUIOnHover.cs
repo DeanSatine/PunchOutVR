@@ -11,6 +11,7 @@ public class DarkenUIOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
     
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (image == null) return;
         image.color = darkenedColour;
         AudioManager.instance.PlayOneShot(AudioManager.instance.UI_OnHover);
     }
@@ -18,6 +19,7 @@ public class DarkenUIOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
     // Called when the mouse exits the UI element
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (image == null) return;
         image.color = Color.white;
     }
 }

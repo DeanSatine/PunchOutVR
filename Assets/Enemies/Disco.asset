@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b167851848320c458a34a1859e7d51d, type: 3}
   m_Name: Disco
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 150
   Block_NunberSavedAttacks: 5
   Block_AverageSpeedUntilBlock: 1
   Block_TimeUntilStopBlocking: 2
@@ -22,7 +22,7 @@ MonoBehaviour:
   Movement_ToFarAwayFromPlayer: 2
   Movement_PreferedDistanceFromPlayer: 1.5
   Movement_MovementBeforeAttackingRandomizer: 3
-  Combat_Damage: 10
+  Combat_Damage: 7
   Combat_Damage_SpeedModifier: 2
   Combat_JabTimes:
   - 1.2166667

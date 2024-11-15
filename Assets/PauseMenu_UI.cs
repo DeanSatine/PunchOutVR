@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PauseMenu_UI : MonoBehaviour
@@ -17,14 +18,15 @@ public class PauseMenu_UI : MonoBehaviour
     [SerializeField] GameObject settingsMenu;
     const float menuDistance = 1.5f;
 
-    private void Awake()
+    internal virtual void Awake()
     {
         if(instance != null) { Destroy(instance.gameObject); }
         instance = this;
     }
 
-    public void Unpause()
+    public virtual void Unpause()
     {
+        if (pauseCanvas == null) return;
         Time.timeScale = 1;
         pauseCanvas.enabled = paused = false;
 
@@ -32,8 +34,9 @@ public class PauseMenu_UI : MonoBehaviour
         settingsMenu.SetActive(false);
     }
 
-    public void Pause(InputAction.CallbackContext context) // param only so that i can call subscribe it to action.
+    public virtual void Pause(InputAction.CallbackContext context) // param only so that i can call subscribe it to action.
     {
+        if (pauseCanvas == null) return;
         if (paused) // if already paused, unpause.
         {
             Unpause();
@@ -52,7 +55,7 @@ public class PauseMenu_UI : MonoBehaviour
     }
 
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         var xrControls = inputActionAsset.FindActionMap("CustomInputs");
         pauseAction = xrControls.FindAction("Pause");
@@ -60,8 +63,18 @@ public class PauseMenu_UI : MonoBehaviour
         pauseAction?.Enable();
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         pauseAction?.Disable();
+    }
+
+    public virtual void ReturnMainMenu()
+    {
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+    }
+    private void OnDestroy()
+    {
+        Destroy(instance);
+        instance = null;
     }
 }

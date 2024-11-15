@@ -5,6 +5,7 @@ using UnityEngine.XR;
 
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections;
+using FMOD.Studio;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerFist rightHand;
     [SerializeField] PlayerFist leftHand;
     [SerializeField] EventReference punchEvent;
+    EventInstance crowdCheer;
+    [SerializeField] EventReference crowdCheerEvent;
+    EventInstance heartbeat;
+    [SerializeField] EventReference heartbeatEvent;
     Healthbar healthBar;
     #endregion
 
@@ -37,7 +42,7 @@ public class Player : MonoBehaviour
 
     Coroutine leftHandPunchSound;
     Coroutine rightHandPunchSound;
-
+    Coroutine IFrameCoroutine;
 
     #endregion
 
@@ -78,7 +83,8 @@ public class Player : MonoBehaviour
         InitializeControllers();
         InitializePlayer();
         currentHealth = maxHealth;
-        //punchCooldown = new WaitForSeconds(punchSoundCooldown);
+        AudioManager.instance.UpdateHealthFmodParam(currentHealth);
+        punchCooldown = new WaitForSeconds(punchSoundCooldown);
         healthBar = GetComponentInChildren<Healthbar>(true);
         healthBar.Initialize(maxHealth, false);
         // rn i have both these actions doing the same thing. later we can do different effects depending though.
@@ -91,6 +97,13 @@ public class Player : MonoBehaviour
         {
             DEBUG_UI.instance.SetBlockingStateText(IsBlocking);
         };
+
+        //play crowd cheer and heartbeat fmod event
+        crowdCheer = RuntimeManager.CreateInstance(crowdCheerEvent);
+        crowdCheer.start();
+
+        heartbeat = RuntimeManager.CreateInstance(heartbeatEvent);
+        heartbeat.start();
     }
     void Update()
     {
@@ -125,7 +138,7 @@ public class Player : MonoBehaviour
     IEnumerator PlayPunch(bool isRightHand = false)
     {
         AudioManager.instance.PlayOneShot(punchEvent);
-        yield return new WaitForSeconds(punchSoundCooldown); //punchCooldown;
+        yield return punchCooldown;
         if (isRightHand) rightHandPunchSound = null;
         else leftHandPunchSound = null;
 
@@ -141,7 +154,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-
+        if (IFrameCoroutine != null) return;
         int preDamageHealth = currentHealth;
         currentHealth -= Mathf.FloorToInt(damage * (IsBlocking ? blockingDamageMultiplier : 1)); // if blocking, deal 25% reduced damage
         healthBar.UpdateHealthBar(preDamageHealth, currentHealth);
@@ -152,7 +165,13 @@ public class Player : MonoBehaviour
         }
 
         AudioManager.instance.UpdateHealthFmodParam(currentHealth);
+        IFrameCoroutine = StartCoroutine(IFrames(0.35f));
         
+    }
+    IEnumerator IFrames(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        IFrameCoroutine = null;
     }
 
     private void InitializeControllers()
@@ -171,5 +190,10 @@ public class Player : MonoBehaviour
     private void OnDestroy()
     {
         Settings.OnHandednessChange -= (value) => ChangeHandedness(value);
+
+        heartbeat.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        heartbeat.release();
+        crowdCheer.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        crowdCheer.release();
     }
 }
