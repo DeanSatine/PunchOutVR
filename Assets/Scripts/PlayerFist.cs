@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using FMOD.Studio;
+using FMODUnity;
 
 public class PlayerFist : MonoBehaviour
 {
     #region Variables and Properties
     [SerializeField] bool isRightHand;
+    [SerializeField]EventReference punchHitEvent;
     public bool IsRightHand => isRightHand;
 
     public bool isBlocking;
@@ -18,7 +21,6 @@ public class PlayerFist : MonoBehaviour
 
     #endregion
 
-
     private void Update()
     {
         if (Player.instance.isRightHanded != IsRightHand) // if this hand is NOT the main hand.
@@ -30,11 +32,13 @@ public class PlayerFist : MonoBehaviour
                 RotateGloveCanvas(isCurrentlyUpwards);
             }
         }
+
+
     }
 
     void RotateGloveCanvas(bool isUpwards)
     {
-        if(rotationCoroutine!= null)StopCoroutine(rotationCoroutine);
+        if (rotationCoroutine != null) StopCoroutine(rotationCoroutine);
         if (isUpwards)
         {
             rotationCoroutine = StartCoroutine(SmoothRotateGloveCanvas(180));
@@ -58,7 +62,7 @@ public class PlayerFist : MonoBehaviour
                 float currentZ = Mathf.Lerp(startZ, targetZRotation, t);
 
                 // set Z rotation while keeping X and Y unchanged
-                gloveCanvas.localRotation= Quaternion.Euler(gloveCanvas.localRotation.eulerAngles.x, gloveCanvas.localRotation.eulerAngles.y, currentZ);
+                gloveCanvas.localRotation = Quaternion.Euler(gloveCanvas.localRotation.eulerAngles.x, gloveCanvas.localRotation.eulerAngles.y, currentZ);
 
                 yield return null;
             }
@@ -95,6 +99,9 @@ public class PlayerFist : MonoBehaviour
                 targetBodyPart.TakeDamage(GetVelocityModifiedDamage());
             }
             else enemyPart.TakeDamage(GetVelocityModifiedDamage());
+
+            Player.instance.SendVibration(IsRightHand, 1, 1);
+            PlayPunchHit();
         }
     }
 
@@ -163,6 +170,20 @@ public class PlayerFist : MonoBehaviour
             0,     // minimum velocity threshhold ( velocity for minimum damage )
             5);    // maximum velocity threshhold ( velocity for maximum damage )
     }
+
+    public void PlayPunchHit()
+    {
+        AudioManager.instance.PlayOneShot(punchHitEvent); // see if u can make createinstance version work.
+        /*
+        var velocities = Player.instance.HandVelocities;
+        float speed = isRightHand ? velocities.right.magnitude : velocities.left.magnitude;
+        EventInstance punchHitInstance = RuntimeManager.CreateInstance(punchHitEvent);
+        punchHitInstance.setParameterByName("Speed", speed.NormalizeToRange(0, 20));
+        punchHitInstance.start();
+        punchHitInstance.release();
+        */
+    }
+
 
 
 }

@@ -6,6 +6,7 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections;
 using FMOD.Studio;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 
 public class Player : MonoBehaviour
 {
@@ -133,6 +134,8 @@ public class Player : MonoBehaviour
             }
         }
 
+
+
     }
 
     IEnumerator PlayPunch(bool isRightHand = false)
@@ -163,9 +166,9 @@ public class Player : MonoBehaviour
         {
             MatchManager.instance.Start_PlayerLoseState();
         }
-
         AudioManager.instance.UpdateHealthFmodParam(currentHealth);
         IFrameCoroutine = StartCoroutine(IFrames(0.35f));
+        SendVibration(1, 1);
         
     }
     IEnumerator IFrames(float duration)
@@ -181,7 +184,25 @@ public class Player : MonoBehaviour
         RightControllerDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
     }
     #endregion
+    /// <summary>
+    /// chose hand for vibration,
+    /// </summary>
 
+    public void SendVibration(bool isRightHand,float amplitude, float duration)
+    {
+
+        HapticImpulsePlayer hapticHandler = isRightHand ? rightHand.GetComponentInParent<HapticImpulsePlayer>() : leftHand.GetComponentInParent<HapticImpulsePlayer>();
+        hapticHandler.SendHapticImpulse(amplitude, duration);
+       
+    }
+    /// <summary>
+    /// Sends vibration to both hands.
+    /// </summary>
+
+    public void SendVibration(float amplitude,float duration){
+        rightHand.GetComponentInParent<HapticImpulsePlayer>().SendHapticImpulse(amplitude, duration);
+        leftHand.GetComponentInParent<HapticImpulsePlayer>().SendHapticImpulse(amplitude, duration);
+    }
     private void InitializePlayer()
     {
         Settings.OnHandednessChange += (value) => ChangeHandedness(value);

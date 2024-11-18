@@ -8,7 +8,7 @@
 			<value>2</value>
 		</property>
 		<relationship name="folder">
-			<destination>{2ca2d260-9fcc-443b-8747-393a28ca491b}</destination>
+			<destination>{d617d0e6-a5e9-495e-8f84-a1e6eaaa4f89}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{71e4a943-e607-4683-be8a-75a2e8d18c53}</destination>
@@ -109,7 +109,6 @@
 		<property name="startOffset">
 			<value>24</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{6f76268c-c50b-4eec-a5fd-fc884f59e4ca}</destination>
 		</relationship>

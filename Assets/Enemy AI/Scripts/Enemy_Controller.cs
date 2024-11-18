@@ -48,8 +48,11 @@ public class Enemy_Controller : MonoBehaviour
     [SerializeField] string Animator_ParemeterName_IsDead;
     [SerializeField] string Animator_ParemeterName_HorizontalVector;
     [SerializeField] string Animator_ParemeterName_VerticalVector;
-
+    
     bool isEnemyDead = false;
+
+
+    Coroutine currentReddenCoroutine;
     #endregion
 
     // Start is called before the first frame update
@@ -66,8 +69,6 @@ public class Enemy_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (!isEnemyDead && isMatchStarted)
         {
             EnemyAnimator.SetBool(Animator_ParemeterName_IsBlocking, isBlocking);
@@ -100,7 +101,33 @@ public class Enemy_Controller : MonoBehaviour
         }
 
     }
+    void ReddenOnHit() // make enemy red on hit.
+    { 
+        Renderer rend = transform.GetComponentInChildren<Renderer>(); // get first renderer//
+        if (rend.sharedMaterials.Length > 1) // if has 2nd material
+        {
+            foreach(Material m in rend.sharedMaterials)
+            {
+                if(m.name == "RimShader")
+                {
+                    if(currentReddenCoroutine!=null)StopCoroutine(currentReddenCoroutine);
+                    currentReddenCoroutine = StartCoroutine(HitRedden(m));
+                }
+            }
+            
 
+        }
+
+
+        IEnumerator HitRedden(Material m)
+        {
+            m.SetFloat("_Alpha", 0.33f);
+            yield return new WaitForSeconds(0.33f);
+            m.SetFloat("_Alpha", 0);
+            currentReddenCoroutine = null;
+        }
+
+    }
     public void TakeDamage(int Damage)
     {
         int preDamageHealth = health;
@@ -108,6 +135,8 @@ public class Enemy_Controller : MonoBehaviour
         health -= finalDamage;
 
         healthbar.UpdateHealthBar(preDamageHealth, health);
+        if(!isBlocking)ReddenOnHit();
+
 
         if (TimeBetweenPlayerStrikes.Count == enemy.Block_NunberSavedAttacks)
         {
